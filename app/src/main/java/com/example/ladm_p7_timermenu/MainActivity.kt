@@ -11,16 +11,21 @@ import com.example.ladm_p7_timermenu.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         lateinit  var binding: ActivityMainBinding //para binding
-        var contador=1
-        val timer = object : CountDownTimer(20000,1000)
-                override fun onTick(x : Long){
-                    binding.resultado.setText("Contador ${contador++}")
-                }
+        var contador=0
 
-        override fun onFinish(){
-            //se ejecuta cuando tiempototal=0
-            start()
+        val timer = object : CountDownTimer(20000,1000){
+            override fun onTick(p0: Long) {
+                //Se ejecuta cuando el intervalo=0
+                binding.resultado.setText("Contador ${contador++}")
+            }
+
+            override fun onFinish() {
+                //Se ejecuta cuando el total=0
+                start()
+            }
+
         }
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater) //para binding
         //setContentView(R.layout.activity_main)
@@ -31,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    //Toodo objeto grafrico de XML debe inflarce para poder cliquearse
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.principal,menu)
         return true
